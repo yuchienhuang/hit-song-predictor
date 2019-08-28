@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hit song predictor</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah|Satisfy|Annie Use Your Telescope" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="/public/render.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <h2 style="font-family:helvetica">
+          Fun w&iexclth Music!
+      </h2>
+    </header>
+
+     <ul class="nav" id="nav-item-container">
+
+
+      </ul>
+
+
+    <script>
+
+    renderNavbar();</script>
+
+
+    <section >
+        <h3 style="font-family:Annie Use Your Telescope">About the Machine Learning model:</h3>
+
+        <p>The predictor is an XGBoost binary logistic model trained on 8,776 songs from 669 selected albums that were either of a best-selling album or an album that contained a top 100 popular song of the year from 2014 to 2018.</p>
+        <p>The training feature variables we used were all, except the ordering of a track on an album, intric to the music - the mode, the tempo, the duration, and features from a subset of analyzed audio features provided by <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/"target="_blank">Spotify's Web API</a>: acousticness,  danceability,  energy,  liveness,  speechiness, and valence.</p>
+        <p>This was an imbalanced classification problem - only 518 out of 5,879 songs in the training set  were labeled as "hit" (whose popularity score, provided also by Spotify's Database, was higher than that of its album. </p>
+        <p>We aimed to work on a high precision model - the predicted hit songs would be more trustworthy, but there might not always be predicted "hit" songs on an album. Therefore, we also listed the top two songs with the highest raw probablility predicted by the model.</p>
+        <p>Surprisingly with only overall values of intrinsic audio features, our model was able to achieve a .85 precision score on the test set (the remaining 2897 songs) already. Among all the 56 features, the two most important were the coupling between (1) ordering and danceability, and (2) ordering and duration, while the most important linear term was valence (ranked 11).</p>
+        <p>In addition to the predicted results, the app also prints out the audio features and the Spotify popularity scores of the albums and the tracks for users' reference (the tracks are ordered by the popularity for users' easy comparison). So...have fun trying it out!</p>
+      </section>
+
+
+
+
+
+  </body>
+</html>
+
+
